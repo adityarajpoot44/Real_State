@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-function SingUp(){
+function SignUp(){
     return(
         <>
         <h1>SingUp</h1>
@@ -9,4 +9,4 @@ function SingUp(){
     );
 }
 
-export default SingUp;
+export default SignUp;

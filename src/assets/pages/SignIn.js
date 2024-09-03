@@ -1,12 +1,12 @@
 
 import React from 'react';
 
-function SingIn(){
+function SignIn(){
     return(
         <>
-        <h1>SingIn</h1>
+        <h1>SignIn</h1>
         </>
     );
 }
 
-export default SingIn;
+export default SignIn;
