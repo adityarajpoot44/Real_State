@@ -2,6 +2,7 @@
   "name": "realstate",
   "version": "1.0.0",
   "main": "index.js",
+  "type":"module",
   "scripts": {
     "dev": "node api/index.js",
     "start": "nodemon api/index.js"
