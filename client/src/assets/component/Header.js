@@ -2,7 +2,6 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 const Header = () => {
-  let text = "search";
   return (
     <>
       <header className="bg-slate-200">
