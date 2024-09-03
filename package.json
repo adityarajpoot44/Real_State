@@ -1,0 +1,17 @@
+{
+  "name": "realstate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev":"node api/index.js",
+    "start": "nodemon api/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  }
+}
