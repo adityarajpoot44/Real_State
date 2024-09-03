@@ -1,12 +1,19 @@
+import React from "react";
 
-import React from 'react';
-
-function SignIn(){
-    return(
-        <>
-        <h1>SignIn</h1>
-        </>
-    );
+function SignIn() {
+  return (
+    <>
+      <div className="">
+        <form className="">
+          <label>Email</label>
+          <input type="text" placeholder="Email" className="z" />
+          <label>Password</label>
+          <input type="text" placeholder="Password" className="" />
+          <input type="submit" value="Log In"></input>
+        </form>
+      </div>
+    </>
+  );
 }
 
 export default SignIn;

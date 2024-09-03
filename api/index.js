@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
-import userRouter from './routes/user.route.js'
+import userRouter from './routes/user.route.js';
+import authRouter from "./routes/auth.route.js";
 dotenv.config();
 
 mongoose.connect("mongodb+srv://adityakumar82:Akr8279@real-estate.misdn.mongodb.net/real-state?retryWrites=true&w=majority&appName=real-estate").then(()=>{
@@ -10,11 +11,12 @@ mongoose.connect("mongodb+srv://adityakumar82:Akr8279@real-estate.misdn.mongodb.
     console.log("error",error)
 })
 const app = express();
- 
+app.use(express.json());
 const port = 3000;
 
 app.listen(port,()=>{
     console.log(`server is ready ${port}`);
 })
 
-app.use('/api',userRouter);
+app.use('/api/user',userRouter);
+app.use('/api/auth',authRouter);
