@@ -7,7 +7,7 @@ import SignIn from './assets/pages/SignIn';
 import Profile from './assets/pages/Profile';
 import About from './assets/pages/About';
 import Header from './assets/component/Header';
-import Footer from './assets/component/Footer';
+// import Footer from './assets/component/Footer';
 
 function App() {
   
@@ -21,7 +21,7 @@ function App() {
       <Route path='/sign-up' element={<SignUp/>}></Route>
       <Route path='/sign-in' element={<SignIn/>}></Route>
     </Routes>
-    <Footer/>
+    {/* <Footer/> */}
     </BrowserRouter>
   );
 }
