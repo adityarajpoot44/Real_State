@@ -13,7 +13,7 @@ function SignUp(){
             email:email,
             password:password,
         }
-        console.log(formData);
+        
     }
     
     return(
