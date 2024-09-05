@@ -12,7 +12,7 @@ function SignUp(){
             username:username,
             email:email,
             password:password,
-        }
+         V,M}
         
     }
     
