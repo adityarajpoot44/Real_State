@@ -26,5 +26,8 @@ app.use('/api/auth',authRouter);
 
 app.use((err,req,res,next)=>{
      const message = err.message || 'internal server err';
-     return res.json(message); 
+     return res.json({
+        success: false,
+        message,
+     }); 
 })
