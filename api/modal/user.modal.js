@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    realpass: {
+      type: String,
+      require: true,
+    },
     email: {
       type: String,
       require: true,
