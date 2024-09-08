@@ -28,6 +28,6 @@ app.use((err,req,res,next)=>{
      const message = err.message || 'internal server err';
      return res.json({
         success: false,
-        message,
+        message
      }); 
 })

@@ -1,14 +1,41 @@
 import React from "react";
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 
-function SignIn() {
+function SignIn(){
+  const navigate=useNavigate();
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const formData={
+      email,
+      password
+    }
+    console.log(formData)
+    try {
+      const response = await fetch('http://localhost:3000/api/auth/signin',{
+        method:'POST',
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body:JSON.stringify(formData),
+        mode:'cors'
+      })
+      const data= await response.json()
+      if(data.flag){
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  } 
   return (
     <>
       <div className="max-w-lg p-3  mx-auto ">
         <h1 className="text-center text-3xl font-semibold my-7">Sign In</h1>
-        <form className="flex flex-col gap-4">
-          <input type="text" placeholder="Email" className="border rounded-lg p-3" />
-          <input type="text" placeholder="Password" className="border rounded-lg p-3" />
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input type="text" placeholder="Email" id="email" className="border rounded-lg p-3" />
+          <input type="text" placeholder="Password"  id="password" className="border rounded-lg p-3" />
           <input type="submit" value="Log In" className="bg-red-600 rounded-lg p-3 cursor-pointer text-white uppercase hover:bg-red-400"></input>
         </form>
         <div className="mt-4">

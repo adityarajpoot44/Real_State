@@ -1,9 +1,11 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 function SignUp() {
-  var [Loading, setLoading] = useState(false)
+  var [Loading, setLoading] = useState(false);
+  const navigate=useNavigate();
+  
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
@@ -26,12 +28,13 @@ function SignUp() {
         body: JSON.stringify(formData),
         mode: 'cors',
       });
-      
+
       const data = await response.json();
       console.log('Response Data:', data);
 
       if (data.flag) {
         alert("Account Created");
+        navigate('/sign-in');
       } else {
         alert(data.message);
       }
