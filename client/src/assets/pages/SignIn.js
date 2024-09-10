@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {Link,useNavigate} from 'react-router-dom';
 
 function SignIn(){
+  const [loading,setloading]=useState(false);
   const navigate=useNavigate();
   async function handleSubmit(event) {
     event.preventDefault();
+    setloading(true)
     const email = event.target.email.value;
     const password = event.target.password.value;
     const formData={
@@ -21,10 +23,13 @@ function SignIn(){
         body:JSON.stringify(formData),
         mode:'cors'
       })
-      const data= await response.json()
+      const data= await response.json();
+      //give a better view to user;
+      console.log(data);
       if(data.flag){
         navigate('/');
       }
+      setloading(false);
     } catch (error) {
       console.error('Fetch error:', error);
     }
@@ -36,7 +41,7 @@ function SignIn(){
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input type="text" placeholder="Email" id="email" className="border rounded-lg p-3" />
           <input type="text" placeholder="Password"  id="password" className="border rounded-lg p-3" />
-          <input type="submit" value="Log In" className="bg-red-600 rounded-lg p-3 cursor-pointer text-white uppercase hover:bg-red-400"></input>
+          <input type="submit" value={loading ? "Loading..." : "Log In"} disabled={loading} className="bg-red-600 rounded-lg p-3 cursor-pointer text-white uppercase hover:bg-red-400"></input>
         </form>
         <div className="mt-4">
           <span>Dont Have an account?</span>

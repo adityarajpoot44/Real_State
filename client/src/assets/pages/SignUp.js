@@ -54,7 +54,7 @@ function SignUp() {
           <input type="text" placeholder="Username" id='username' className="border rounded-lg p-3" />
           <input type="text" placeholder="Email" id="email" className="border rounded-lg p-3" />
           <input type="text" placeholder="Password" id="password" className="border rounded-lg p-3" />
-          <button type="submit" value="Sign up" className="bg-red-600 rounded-lg p-3 cursor-pointer text-white uppercase hover:bg-red-400">{Loading ? "Loading..." : "Sign up"}</button>
+          <button type="submit" className="bg-red-600 rounded-lg p-3 cursor-pointer text-white uppercase hover:bg-red-400">{Loading ? "Loading..." : "Sign up"}</button>
         </form>
         <div className="mt-4">
           <span>Have an account?</span>
