@@ -4,6 +4,7 @@ import { Link,useNavigate } from 'react-router-dom';
 
 function SignUp() {
   var [Loading, setLoading] = useState(false);
+  
   const navigate=useNavigate();
   
   async function handleSubmit(event) {

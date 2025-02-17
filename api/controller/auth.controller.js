@@ -20,7 +20,8 @@ export const signin = async (req, res, next) => {
     if(!validuser) return next({message:"user not found"});
     const validPassword = bcryptjs.compareSync(password, validuser.password);
     if(!validPassword) return next({message:"wrong password"});
-    res.send({message:"verfy",flag:true})
+    //JWT token 
+    res.send({message:"user verify",flag:true})
     
   } catch (error) {
     next(error);

@@ -1,7 +1,11 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
+import User from "./user";
+import { useSelector } from "react-redux";
 const Header = () => {
+  const {currentUser} =useSelector((data)=>data.user)
+  // console.log(currentUser);
   return (
     <>
       <header className="bg-slate-200">
@@ -18,7 +22,7 @@ const Header = () => {
             <FaSearch className="text-slate-800" />
           </form>
           <div className="">
-            <ul className="flex gap-4">
+            <ul className="flex gap-4 items-center">
               <NavLink
                 to="/"
                 className={({ isActive }) =>
@@ -35,14 +39,15 @@ const Header = () => {
               >
                 <li>About</li>
               </NavLink>
-              <NavLink
+
+              {!currentUser ? <NavLink
                 to="/sign-in"
                 className={({ isActive }) =>
                   isActive ? "text-orange-400" : null
                 }
               >
-                <li>Log in </li>
-              </NavLink>
+                <li>Log In</li>
+              </NavLink>: <li><User/></li>}
             </ul>
           </div>
         </div>

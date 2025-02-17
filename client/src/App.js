@@ -7,6 +7,8 @@ import SignIn from './assets/pages/SignIn';
 import Profile from './assets/pages/Profile';
 import About from './assets/pages/About';
 import Header from './assets/component/Header';
+import Listing from './assets/pages/Listing';
+import Place from './assets/pages/Place';
 // import Footer from './assets/component/Footer';
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
       <Route path='/profile' element={<Profile/>}></Route>
       <Route path='/sign-up' element={<SignUp/>}></Route>
       <Route path='/sign-in' element={<SignIn/>}></Route>
+      <Route path='/create-list' element={<Listing/>}></Route>
+      <Route path='/place' element={<Place/>}></Route>
     </Routes>
     {/* <Footer/> */}
     </BrowserRouter>
