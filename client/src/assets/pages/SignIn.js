@@ -5,7 +5,7 @@ import { signInStart, signInFailure, signInSuccess } from "../../redux/user/user
 
 
 function SignIn(){
-  const { loading} = useSelector ((state) => state.user);
+  const { loading } = useSelector ((state) => state.user);
   const [detail,setdetail]= useState(false);
   const [message,setmessage] =useState()
 
@@ -14,14 +14,16 @@ function SignIn(){
 
   async function handleSubmit(event) {
     event.preventDefault();
+
     dispatch(signInStart());
+
     const email = event.target.email.value;
     const password = event.target.password.value;
     const formData={
       email,
       password
     }
-    console.log(formData)
+
     try {
       const response = await fetch('http://localhost:3000/api/auth/signin',{
         method:'POST',
@@ -32,13 +34,15 @@ function SignIn(){
         mode:'cors'
       })
       const data= await response.json();
-      setmessage(data.message)
-      dispatch(signInFailure(data.message));
-
-      if(data.flag){
-        navigate('/');
-      }
+     
       dispatch(signInSuccess(data));
+      
+      if(data.success){
+        navigate('/profile');
+      }
+      
+      setmessage(data.message)
+    
     } catch (error) {
       console.error('Fetch error:', error);
       dispatch(signInFailure(error.message));

@@ -1,5 +1,6 @@
 import User from "../modal/user.modal.js";
 import bcryptjs from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
@@ -21,7 +22,7 @@ export const signin = async (req, res, next) => {
     const validPassword = bcryptjs.compareSync(password, validuser.password);
     if(!validPassword) return next({message:"wrong password"});
     //JWT token 
-    res.send({message:"user verify",flag:true})
+    res.send({success:true,validuser});
     
   } catch (error) {
     next(error);
