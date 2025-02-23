@@ -17,7 +17,7 @@ function Filter() {
     }
     const handleSubmit=(e)=>{
         e.preventDefault();
-        // console.log(filterData);
+        console.log(filterData);
         // axios.post('/url',filterData);
     }
     return (

@@ -25,7 +25,7 @@ function Profile() {
                 <div className='border rounded-full w-[150px] h-[150px] my-5'>
                     <img className="rounded-full" src={currentUser.validuser.avatar} alt='' />
                 </div>
-                <form className='flex flex-col gap-3 w-1/3 '>
+                <form className='flex flex-col gap-3 md:w-1/3 '>
                     <input type='text' name='username' className='p-3 rounded-lg outline-none' value={currentUser.validuser.username} placeholder='Username'></input>
                     <input type='text' name='email' className='p-3 rounded-lg outline-none' value={currentUser.validuser.email} placeholder='Email'></input>
                     <input type='text'  placeholder='New Password' ref={password} className='p-3 rounded-lg outline-none'></input>

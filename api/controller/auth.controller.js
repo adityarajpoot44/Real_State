@@ -13,7 +13,6 @@ export const signup = async (req, res, next) => {
     next(error)
   }
 };
-
 export const signin = async (req, res, next) => {
   const {email, password } = req.body;
   try {
@@ -22,7 +21,12 @@ export const signin = async (req, res, next) => {
     const validPassword = bcryptjs.compareSync(password, validuser.password);
     if(!validPassword) return next({message:"wrong password"});
     //JWT token 
-    res.send({success:true,validuser});
+        const token =jwt.sign({id:validuser._id},'0LB5tcezUwZbOs1YnDC03zjDJPmODoFz',{ expiresIn: "1h" });
+        const { password: p, ...rest} = validuser._doc;
+
+    res.cookie('access_token', token, { httpOnly: false })
+    .status(200)
+    .json({success:true,token,validuser:rest});
     
   } catch (error) {
     next(error);

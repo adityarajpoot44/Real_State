@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js';
 import authRouter from "./routes/auth.route.js";
 import cors from 'cors';
+import axios from 'axios'
 dotenv.config();
 
 
