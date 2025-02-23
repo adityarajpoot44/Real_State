@@ -1,8 +1,13 @@
 import { useState } from "react"
 import { Link } from "react-router-dom";
+import {useLogout} from "./custom_hook";
+
 
 function User(){
     const [detail,setdetail]=useState(false);
+
+    const LogOut=useLogout();
+
     return (
         <>
         <div>
@@ -12,7 +17,7 @@ function User(){
             {detail && <div className="absolute bg-white rounded p-3 text-sm font-thin mt-1 ml-3 ">
                 <Link to="/profile"><li className="hov_nav hover:text-orange-500">Profile</li></Link>
                 <li className="hov_nav  hover:text-orange-500">Our List</li>
-                <li className="hov_nav  hover:text-orange-500">Logout</li>
+                <li className="hov_nav  hover:text-orange-500" onClick={LogOut} >Logout</li>
             </div>}
         </div>
         </>

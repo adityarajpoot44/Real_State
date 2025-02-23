@@ -41,9 +41,7 @@ function SignIn() {
       })
       const data = await response.json();
       localStorage.setItem("token", data.token); 
-      localStorage.setItem("user", JSON.stringify(data.validuser));
-
-      dispatch(signInSuccess(data));
+      dispatch(signInSuccess(data.validuser));
 
       if (data.success) {
         navigate('/profile');
