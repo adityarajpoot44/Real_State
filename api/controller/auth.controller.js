@@ -24,9 +24,9 @@ export const signin = async (req, res, next) => {
     const token = jwt.sign({ id: validuser._id }, '0LB5tcezUwZbOs1YnDC03zjDJPmODoFz', { expiresIn: "1h" });
     const { password: p, ...rest } = validuser._doc;
 
-    res.cookie('access_token', token, { httpOnly: false })
+    return res.cookie("access_token", token)
       .status(200)
-      .json({ success: true, token, validuser: rest });
+      .json({ success: true, validuser: rest });
 
   } catch (error) {
     next(error);
@@ -39,4 +39,34 @@ export const signOut = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-}
+};
+export const deleteUser = async (req, res, next) => {
+  if (req.user.id !== req.params.id) {
+    return next({ message: "you canonly delete your account" });
+  }
+  try {
+    await User.findByIdAndDelete(req.user.id);
+
+    res.clearCookie('access_token').json('User delete')
+
+  } catch (error) {
+    next(error);
+  }
+};
+export const updateUserPassword = async (req, res, next) => {
+
+  if (req.user.id !== req.params.id) {
+    return next('you can not update other account password {account id missmatch}');
+  }
+  try {
+    const updateUser = await User.findByIdAndUpdate(req.user.id, { $set: req.body, }, { new: true });
+
+    const {password,...rest}=updateUser._doc;
+
+    res.status(200).json(rest)
+
+  } catch (error) {
+    next(error)
+  }
+
+};

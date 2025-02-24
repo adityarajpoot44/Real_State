@@ -33,6 +33,7 @@ function SignIn() {
     try {
       const response = await fetch('http://localhost:3000/api/auth/signin', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -40,7 +41,6 @@ function SignIn() {
         mode: 'cors'
       })
       const data = await response.json();
-      localStorage.setItem("token", data.token); 
       dispatch(signInSuccess(data.validuser));
 
       if (data.success) {

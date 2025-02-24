@@ -1,13 +1,18 @@
 
 import React, { useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import {useLogout} from '../component/custom_hook';
+import axios from 'axios';
+import { deleteUserFailed, deleteUserStart, deleteUserSuccess } from '../../redux/user/userSlice';
 
 function Profile() {
 
     const { currentUser } = useSelector((state) => state.user);
     const Logout = useLogout();
+
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
     
     const password = useRef();
     let repass;
@@ -15,12 +20,23 @@ function Profile() {
     function handleUpdate(e) {
         e.preventDefault();
         if (repass !== password.current.value) {
-            console.log("false");   
+            return alert('password missmatch');
         }
     }
 
     async function handleDeleteAccount(){
-        axios.DELETE('',{currentUser})
+        dispatch(deleteUserStart());
+        axios.delete(`http://localhost:3000/api/auth/delete/${currentUser._id}`,{ withCredentials: true}).then((resp)=>{
+            if(resp.data.success===false){
+                dispatch(deleteUserFailed(resp)); 
+                return;
+            }
+            alert("User Account Deleted Successfully");
+            dispatch(deleteUserSuccess());
+            navigate('/sign-in');
+        }).catch((err)=>{
+            dispatch(deleteUserFailed(err))
+        })
     }
 
     return (
