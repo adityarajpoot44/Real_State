@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function Listing() {
 
@@ -30,7 +30,12 @@ function Listing() {
 
     function handelSubmit(event) {
         event.preventDefault();
-        // axios.post('/property-detail',{formData,imageData})
+        console.log(formData)
+        axios.post('http://localhost:3000/api/user/property-detail',{imageData},{
+            headers: {
+                "Content-Type": "multipart/form-data",
+              },
+        })
     }
 
     return (
@@ -38,11 +43,11 @@ function Listing() {
             <h1 className="font-bold text-center text-4xl">Create Listing</h1>
             <form >
                 <div className="flex flex-col md:flex-row flex-wrap my-8">
-                    <div className="w-1/2 flex flex-col  gap-3 p-4">
+                    <div className="w-full md:w-1/2 flex flex-col  gap-3 p-4">
                         <input type="text" name="name" placeholder="Name" className="p-3 rounded-lg outline-none" onChange={handleChange} required></input>
                         <textarea placeholder="Description" name="description" className="p-3 rounded-lg outline-none" onChange={handleChange} required></textarea>
                         <input type="text" name="address" placeholder="Address" className="p-3 rounded-lg outline-none" onChange={handleChange} required></input>
-                        <div className="flex flex-col gap-3">
+                        <div className="w-full flex flex-col gap-3">
                             <div className="flex flex-row gap-3">
                                 <div>
                                     <input type="radio" value="Rent" name="type" onChange={handleChange} required></input>
@@ -85,10 +90,10 @@ function Listing() {
                         </div>
 
                     </div>
-                    <div className="w-1/2 p-4 flex gap-4 flex-col">
+                    <div className="w-full md:w-1/2 p-4 flex gap-4 flex-col">
                         <p>Image: First Image is the cover (max 6)</p>
                         <div>
-                            <input type="file" name="image" className="border p-2 mr-2" multiple onChange={handleImagedata}></input>
+                            <input type="file" name="image" className="border p-2 mr-2" multiple onChange={handleImagedata} required></input>
                             <button className="uppercase text-green-500 border p-2 border-green-500 cursor-pointer hover:bg-green-200">Upload</button>
                         </div>
                         <div>

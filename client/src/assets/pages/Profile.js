@@ -2,39 +2,56 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import {useLogout} from '../component/custom_hook';
+import { useLogout } from '../component/custom_hook';
 import axios from 'axios';
-import { deleteUserFailed, deleteUserStart, deleteUserSuccess } from '../../redux/user/userSlice';
+import bcryptjs from "bcryptjs";
+import { deleteUserFailed, deleteUserStart, deleteUserSuccess, updateUserDetailsFailure, updateUserDetailsSuccess } from '../../redux/user/userSlice';
 
 function Profile() {
 
     const { currentUser } = useSelector((state) => state.user);
     const Logout = useLogout();
 
-    const dispatch=useDispatch();
-    const navigate=useNavigate();
-    
-    const password = useRef();
-    let repass;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    function handleUpdate(e) {
+    const password = useRef();
+    let repass='';
+
+    function handleUpdate(e) { 
         e.preventDefault();
-        if (repass !== password.current.value) {
-            return alert('password missmatch');
+        if(password.current.value !== ''){
+            if (!(repass === password.current.value)) {
+                return alert('incorrect password');   
+            }
         }
+        
+        axios.put(`http://localhost:3000/api/auth/update/${currentUser._id}`, { withCredentials: true }, {
+            formData: {
+                [e.target.username]: e.target.value,
+                [e.target.email]: e.target.value,
+                password: bcryptjs.hashSync(password.current.value, 10),
+            }
+        }).then((data) => {
+            console.log("user update return value data ",data)
+            dispatch(updateUserDetailsSuccess(data));
+        }).catch((err) => {
+            console.log("update field error =>", err)
+            dispatch(updateUserDetailsFailure(err));
+        })
     }
 
-    async function handleDeleteAccount(){
+    async function handleDeleteAccount() {
         dispatch(deleteUserStart());
-        axios.delete(`http://localhost:3000/api/auth/delete/${currentUser._id}`,{ withCredentials: true}).then((resp)=>{
-            if(resp.data.success===false){
-                dispatch(deleteUserFailed(resp)); 
+        axios.delete(`http://localhost:3000/api/auth/delete/${currentUser._id}`, { withCredentials: true }).then((resp) => {
+            if (resp.data.success === false) {
+                dispatch(deleteUserFailed(resp));
                 return;
             }
             alert("User Account Deleted Successfully");
             dispatch(deleteUserSuccess());
             navigate('/sign-in');
-        }).catch((err)=>{
+        }).catch((err) => {
             dispatch(deleteUserFailed(err))
         })
     }
@@ -44,7 +61,7 @@ function Profile() {
             <div className='flex flex-col mt-10 place-items-center p-4'>
                 <h1 className='text-4xl font-bold'>Dashboard</h1>
                 <div className='border rounded-full w-[150px] h-[150px] my-5'>
-                    <img className="rounded-full" src={currentUser ? currentUser.avatar : null } alt='' />
+                    <img className="rounded-full" src={currentUser ? currentUser.avatar : null} alt='' />
                 </div>
                 <form className='flex flex-col gap-3 w-full md:w-1/3  '>
                     <input type='text' name='username' className='p-3 rounded-lg outline-none' value={currentUser ? currentUser.username : null} placeholder='Username'></input>

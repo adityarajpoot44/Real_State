@@ -1,8 +1,10 @@
 import express from "express";
-import { test } from "../controller/user.controller.js";
+import { properties_details } from "../controller/user.controller.js";
 
 const router = express.Router();
 
-router.get('/test', test);
+
+router.post('/property-detail',properties_details);
+
 
 export default router;

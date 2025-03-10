@@ -53,11 +53,11 @@ export const deleteUser = async (req, res, next) => {
     next(error);
   }
 };
-export const updateUserPassword = async (req, res, next) => {
+export const updateUserDetails = async (req, res, next) => {
 
-  if (req.user.id !== req.params.id) {
-    return next('you can not update other account password {account id missmatch}');
-  }
+  // if (req.user.id !== req.params.id) {
+  //   return next('you can not update other account password {account id missmatch}');
+  // }
   try {
     const updateUser = await User.findByIdAndUpdate(req.user.id, { $set: req.body, }, { new: true });
 

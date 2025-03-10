@@ -1,3 +1,5 @@
-export const test = (req,res) =>{
-    res.json({message:"controller text"}); 
+
+
+export const properties_details = (req, res) => {
+    console.log(req.body);
 }
