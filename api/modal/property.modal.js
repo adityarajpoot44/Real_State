@@ -33,7 +33,12 @@ const propertySchema = new mongoose.Schema({
         type: Number,
         require: true,
     },
-    propImage: []
+    propImage: [
+        {
+            data:Buffer,
+            contentType: String,
+        }
+    ]
 
 },
     { timestamps: true }

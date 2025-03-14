@@ -18,6 +18,9 @@ function Listing() {
     const handleImagedata = (e) => {
         setimageData(Array.from(e.target.files))
     }
+    const handleUpload=()=>{
+        console.log(imageData)
+    }
     const deleteImage =(index)=>{
         setimageData(imageData.filter((_,i)=> i!==index));
     }
@@ -25,13 +28,14 @@ function Listing() {
         setformData(prev => ({
             ...prev,
             [e.target.name]: e.target.value
+
         }))
     }
 
     function handelSubmit(event) {
         event.preventDefault();
         console.log(formData)
-        axios.post('http://localhost:3000/api/user/property-detail',{imageData},{
+        axios.post('http://localhost:3000/api/user/property-detail',{imageData,formData},{
             headers: {
                 "Content-Type": "multipart/form-data",
               },
@@ -94,7 +98,7 @@ function Listing() {
                         <p>Image: First Image is the cover (max 6)</p>
                         <div>
                             <input type="file" name="image" className="border p-2 mr-2" multiple onChange={handleImagedata} required></input>
-                            <button className="uppercase text-green-500 border p-2 border-green-500 cursor-pointer hover:bg-green-200">Upload</button>
+                            <button className="uppercase text-green-500 border p-2 border-green-500 cursor-pointer hover:bg-green-200" onClick={handleUpload}>Upload</button>
                         </div>
                         <div>
                             {imageData.map((image, index) => (
