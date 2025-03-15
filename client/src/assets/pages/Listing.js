@@ -18,9 +18,6 @@ function Listing() {
     const handleImagedata = (e) => {
         setimageData(Array.from(e.target.files))
     }
-    const handleUpload=()=>{
-        console.log(imageData)
-    }
     const deleteImage =(index)=>{
         setimageData(imageData.filter((_,i)=> i!==index));
     }
@@ -35,11 +32,13 @@ function Listing() {
     function handelSubmit(event) {
         event.preventDefault();
         console.log(formData)
-        axios.post('http://localhost:3000/api/user/property-detail',{imageData,formData},{
+        axios.post('http://localhost:3000/api/user/property-detail',{imageData},{
             headers: {
                 "Content-Type": "multipart/form-data",
-              },
+            },
         })
+        .then(response => console.log("Upload successful!", response.data))
+        .catch(error => console.error("Upload error:", error));
     }
 
     return (
@@ -104,7 +103,7 @@ function Listing() {
                             {imageData.map((image, index) => (
                                 <div key={index} className="flex place-content-between p-2">
                                     <img src={URL.createObjectURL(image)} alt="" className="rounded-lg w-[200px] h-[100px]"></img>
-                                    <span className="uppercase cursor-pointer text-red-600 hover:bg-red-500 rounded-lg px-2 hover:text-white h-max" onClick={()=>deleteImage(index)}>Delete</span>
+                                    <span className="uppercase cursor-pointer text-red-600 hover:bg-red-500 rounded-lg px-2 hover:text-white h-max" onClick={() => deleteImage(index)}>Delete</span>
                                 </div>
                             ))}
                         </div>

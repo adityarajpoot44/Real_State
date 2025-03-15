@@ -9,6 +9,7 @@ import About from './assets/pages/About';
 import Header from './assets/component/Header';
 import Listing from './assets/pages/Listing';
 import Place from './assets/pages/Place';
+import PaymentGateway from './assets/pages/Paymentgate';
 // import Footer from './assets/component/Footer';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Route path='/sign-in' element={<SignIn/>}></Route>
       <Route path='/create-list' element={<Listing/>}></Route>
       <Route path='/place' element={<Place/>}></Route>
+      <Route path='/paymentgate' element={<PaymentGateway/>}></Route>
     </Routes>
     {/* <Footer/> */}
     </BrowserRouter>
