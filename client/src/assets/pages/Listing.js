@@ -3,6 +3,8 @@ import { useState } from "react";
 
 function Listing() {
 
+    const formDataToSend= new FormData();
+    const [imageData, setimageData] = useState([]);
     const [formData, setformData] = useState({
         name: '',
         description: '',
@@ -13,7 +15,13 @@ function Listing() {
         baths: 1,
         price: 0,
     })
-    const [imageData, setimageData] = useState([]);
+    
+    Object.keys(formData).forEach((key)=>{
+        formDataToSend.append(key, formData[key]);
+    })
+    imageData.forEach((image,index)=>{
+        formDataToSend.append('image',image)
+    })
 
     const handleImagedata = (e) => {
         setimageData(Array.from(e.target.files))
@@ -31,14 +39,17 @@ function Listing() {
 
     function handelSubmit(event) {
         event.preventDefault();
-        console.log(formData)
-        axios.post('http://localhost:3000/api/user/property-detail',{imageData},{
+        console.log(formDataToSend)
+        axios.post('http://localhost:3000/api/user/property-detail',formDataToSend,{
             headers: {
                 "Content-Type": "multipart/form-data",
             },
         })
-        .then(response => console.log("Upload successful!", response.data))
+        .then(response => console.log("Upload successful!", response.data)) 
         .catch(error => console.error("Upload error:", error));
+    }
+    function handleUpload(e){
+        e.preventDefault();
     }
 
     return (
