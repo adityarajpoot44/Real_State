@@ -66,7 +66,7 @@ function SignIn() {
           </div>
           }
           <input type="text" placeholder="Email" id="email" className="border rounded-lg p-3" defaultValue="admin@gmail.com" onBlur={checkEmailFormate} required />
-          <input type="text" placeholder="Password" id="password" className="border rounded-lg p-3" value={"admin@123"} required />
+          <input type="text" placeholder="Password" id="password" className="border rounded-lg p-3" defaultValue="admin@123" required />
           <input type="submit" value={loading ? "Loading..." : "Log In"} disabled={loading} className="bg-red-600 rounded-lg p-3 cursor-pointer text-white uppercase hover:bg-red-400"></input>
         </form>
         <div className="mt-4">

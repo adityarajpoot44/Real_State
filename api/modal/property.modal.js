@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const propertySchema = new mongoose.Schema({
+    userId:{
+        type:String,
+        require:true,
+    },
     name: {
         type: String,
         require: true,

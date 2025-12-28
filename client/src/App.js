@@ -10,6 +10,7 @@ import Header from './assets/component/Header';
 import Listing from './assets/pages/Listing';
 import Place from './assets/pages/Place';
 import PaymentGateway from './assets/pages/Paymentgate';
+import Mylist from './assets/pages/Mylist';
 // import Footer from './assets/component/Footer';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <Route path='/create-list' element={<Listing/>}></Route>
       <Route path='/place' element={<Place/>}></Route>
       <Route path='/paymentgate' element={<PaymentGateway/>}></Route>
+      <Route path='/our-list' element={<Mylist/>}></Route>
     </Routes>
     {/* <Footer/> */}
     </BrowserRouter>
